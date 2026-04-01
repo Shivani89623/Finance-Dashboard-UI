@@ -1,16 +1,88 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+# 💰 Shivani Finance Dashboard
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+A clean and interactive **Finance Dashboard** built with **React** and **Tailwind CSS** to track income, expenses, and spending insights.  
+This project was created as part of a **Frontend Developer Intern** assignment at **Zorvyn FinTech Pvt. Ltd.**
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+- **Dashboard Overview**
+  - Total Balance, Income, and Expenses cards
+  - Interactive **Pie Chart** for Income vs Expense
+  - **Line Chart** showing spending trend
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Transactions**
+  - View all transactions with **Date, Amount, Category, and Type**
+  - **Add, Edit, and Delete transactions** (Admin role)
+  - Simple filtering and sorting
+
+- **Insights**
+  - Highest spending category
+  - Total expense summary
+  - Smart suggestions based on spending patterns
+
+- **Role-Based UI**
+  - **Viewer**: Can only view data
+  - **Admin**: Can add/edit transactions
+  - Switch roles using dropdown
+
+- **Dark Mode**
+  - Toggle between light and dark themes
+
+- **Responsive Design**
+  - Works perfectly on desktop and mobile screens
+
+---
+
+## 🛠 Tech Stack
+
+- **React** – Frontend library
+- **Tailwind CSS** – Styling
+- **Recharts** – Charts (Pie, Line)
+- **Context API** – State management
+- **React Icons** – UI icons
+
+---
+
+## Setup Instructions
+
+1. **Clone the repository**:
+```bash
+git clone https://github.com/username/finance-dashboard.git
+
+
+
+
+Navigate to project folder:
+cd finance-dashboard
+
+Install dependencies:
+npm install
+
+Start the development server:
+npm start
+
+Open your browser at http://localhost:3000
+
+🗂 Folder Structure
+finance-dashboard/
+│
+├─ src/
+│   ├─ components/      # Navbar, Sidebar, Dashboard, Transactions, Insights
+│   ├─ context/         # AppContext for state management
+│   ├─ App.jsx
+│   └─ index.jsx
+│
+├─ package.json
+├─ tailwind.config.js
+└─ README.md
+
+
+💡 Notes:
+This is a frontend-only project using mock/static data.
+Role switch and dark mode are handled entirely on the frontend.
+Designed with clarity, simplicity, and professional UI/UX in mind.
+Handles empty states gracefully (no transactions or no data).
