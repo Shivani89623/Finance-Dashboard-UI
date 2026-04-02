@@ -20,7 +20,7 @@ export const AppProvider = ({ children }) => {
       { id: 7, date: "2026-07-01", amount: 10000, category: "Salary", type: "income" },
       { id: 8, date: "2026-07-02", amount: 3000, category: "Food", type: "expense" },
       { id: 9, date: "2026-08-01", amount: 12000, category: "Salary", type: "income" },
-      { id: 10, date: "2026-08-02", amount: 4000, category: "Load Repayments", type: "expense" }
+      { id: 10, date: "2026-08-02", amount: 4000, category: "Loan Repayments", type: "expense" }
     ];
   });
 
