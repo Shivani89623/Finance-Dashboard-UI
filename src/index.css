@@ -1,8 +1,4 @@
 
-
-
-
-
 /* ===== GLOBAL ===== */
 body {
   margin: 0;
@@ -10,7 +6,6 @@ body {
   transition: 0.3s;
 }
 
-/* Layout */
 .app {
   display: flex;
   min-height: 100vh;
@@ -99,7 +94,7 @@ body {
   cursor: pointer;
 }
 
-/* ===== MAIN ===== */
+/* ===== MAIN CONTENT ===== */
 .main-content {
   flex: 1;
   display: flex;
@@ -119,6 +114,8 @@ body {
   background: white;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
   transition: 0.3s;
+  position: relative;
+  overflow: hidden;
 }
 
 .app.dark .card,
@@ -128,144 +125,12 @@ body {
   box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
-.card:hover {
-  transform: translateY(-6px);
+.card:hover,
+.insight-card:hover,
+.chart-box:hover {
+  transform: translateY(-6px) scale(1.02);
 }
 
-/* Gradient Border Effect */
-.balance {
-  border-left: 5px solid #8b5cf6;
-}
-.income {
-  border-left: 5px solid #22c55e;
-}
-.expense {
-  border-left: 5px solid #ef4444;
-}
-
-/* ===== GRID ===== */
-.card-grid,
-.insights-grid,
-.chart-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-}
-
-/* ===== TEXT ===== */
-.card-title,
-.label {
-  font-size: 13px;
-  color: #64748b;
-}
-
-.card-value,
-.value {
-  font-size: 22px;
-  font-weight: 600;
-  margin-top: 6px;
-}
-
-/* ===== BUTTONS ===== */
-.btn {
-  padding: 8px 14px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.primary {
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  color: white;
-}
-
-.success {
-  background: #22c55e;
-  color: white;
-}
-
-/* ===== TABLE ===== */
-.table-box {
-  overflow-x: auto;
-  border-radius: 12px;
-  background: white;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-.app.dark .table-box {
-  background: #1e293b;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 500px;
-}
-
-th {
-  background: #f1f5f9;
-  font-weight: 600;
-}
-
-.app.dark th {
-  background: #020617;
-}
-
-th, td {
-  padding: 12px;
-  text-align: center;
-}
-
-tr:hover {
-  background: #f8fafc;
-}
-
-.app.dark tr:hover {
-  background: #334155;
-}
-
-/* ===== COLORS ===== */
-.income-text { color: #22c55e; }
-.expense-text { color: #ef4444; }
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-
-  .app {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-  }
-
-  .navbar {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .page-content {
-    padding: 15px;
-  }
-}
-/* ===== PREMIUM COLORED CARDS ===== */
-
-/* Common Card Style */
-.card,
-.insight-card {
-  padding: 20px;
-  border-radius: 16px;
-  background: white;
-  position: relative;
-  overflow: hidden;
-  transition: 0.3s;
-}
-
-/* Glow effect */
 .card::before,
 .insight-card::before {
   content: "";
@@ -281,59 +146,60 @@ tr:hover {
   opacity: 1;
 }
 
-/* Hover lift */
-.card:hover,
-.insight-card:hover {
-  transform: translateY(-6px) scale(1.01);
+/* Gradient Category Colors */
+.balance { background: linear-gradient(135deg, #8b5cf6, #6366f1); color: white; }
+.income { background: linear-gradient(135deg, #22c55e, #4ade80); color: white; }
+.expense { background: linear-gradient(135deg, #ef4444, #f87171); color: white; }
+.purple { background: linear-gradient(135deg, #8b5cf6, #6366f1); color: white; }
+.red { background: linear-gradient(135deg, #ef4444, #f87171); color: white; }
+.green { background: linear-gradient(135deg, #22c55e, #4ade80); color: white; }
+
+.card-title, .label { font-size: 13px; color: rgba(255,255,255,0.8); }
+.card-value, .value { font-size: 22px; font-weight: 600; margin-top: 6px; }
+
+/* ===== GRID ===== */
+.card-grid,
+.insights-grid,
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
 }
 
-/* ===== CATEGORY COLORS ===== */
+/* ===== TABLE ===== */
+.table-box {
+  overflow-x: auto;
+  border-radius: 14px;
+}
 
-/* Purple (Top Category) */
-.purple {
-  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 500px;
+}
+
+thead {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
   color: white;
 }
 
-/* Red (Expense) */
-.red {
-  background: linear-gradient(135deg, #ef4444, #f87171);
-  color: white;
+th, td {
+  padding: 12px;
+  text-align: center;
 }
 
-/* Green (Income / Avg) */
-.green {
-  background: linear-gradient(135deg, #22c55e, #4ade80);
-  color: white;
+tbody tr:hover {
+  background: rgba(99,102,241,0.1);
 }
 
-/* Dashboard Cards */
-.balance {
-  background: linear-gradient(135deg, #8b5cf6, #6366f1);
-  color: white;
+.app.dark tbody tr:hover {
+  background: rgba(255,255,255,0.1);
 }
 
-.income {
-  background: linear-gradient(135deg, #22c55e, #4ade80);
-  color: white;
-}
+.income-text { color: #22c55e; }
+.expense-text { color: #ef4444; }
 
-.expense {
-  background: linear-gradient(135deg, #ef4444, #f87171);
-  color: white;
-}
-
-/* Text inside colored cards */
-.purple .label,
-.red .label,
-.green .label,
-.balance .card-title,
-.income .card-title,
-.expense .card-title {
-  color: rgba(255,255,255,0.8);
-}
-
-/* ===== INSIGHT BOX (Observation) ===== */
+/* ===== OBSERVATION BOX ===== */
 .insight-box {
   margin-top: 25px;
   padding: 20px;
@@ -342,17 +208,31 @@ tr:hover {
   color: white;
 }
 
-/* ===== TRANSACTION TABLE IMPROVEMENT ===== */
-.table-box {
-  border-radius: 14px;
-  overflow: hidden;
-}
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
 
-thead {
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  color: white;
-}
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+  }
 
-tbody tr:hover {
-  background: rgba(99,102,241,0.1);
+  .menu-item { padding: 8px 10px; font-size: 14px; }
+
+  .navbar { flex-direction: column; gap: 10px; }
+
+  .page-content { padding: 15px; }
+
+  .card-grid,
+  .insights-grid,
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  table { min-width: 100%; }
 }
