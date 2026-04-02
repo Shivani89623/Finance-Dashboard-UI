@@ -11,26 +11,18 @@ People who want to track their personal expenses and savings.
 Small business owners who need a simple finance overview.
 Anyone who wants easy charts and summaries of their money.
 
-3. Main Features & Why They Are Useful
-Feature	Why It Helps
-Expense Overview Cards	Shows key numbers like total expenses, income, and savings at the top → quick view for users.
-Category-wise Pie Chart	Shows how money is spent in different categories like Food, Travel, Bills → users can see big spend areas easily.
-Monthly Trend Line Chart	Shows income and expenses month by month → users can track patterns and plan better.
-Responsive Layout	Works on both computer and mobile → easy to use anywhere.
-Interactive Charts	Hovering shows exact numbers, filters let users check specific months or categories → user control and clarity.
-
-4. Layout & Navigation
+3. Layout & Navigation
 Important info first → Users see main numbers immediately.
 Cards → Charts → Details → easy to read and understand.
 Clean design → simple fonts, colors, and spacing make dashboard neat.
 
-5. How Users Interact
+4. How Users Interact
 Hover on charts → shows exact values.
 Click filters → see only what they want (month, category, etc.)
 Everything is easy to read and understand → no confusion.
 Colors in charts help users quickly identify big and small expenses.
 
-6. Summary
+5. Summary
 This dashboard is built thinking about the user:
 Users can understand their financial health in seconds.
 Charts make numbers easy to understand.
