@@ -2,7 +2,6 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 
-
 const Transactions = () => {
   const {
     transactions: financeData,
@@ -14,6 +13,7 @@ const Transactions = () => {
 
   const [searchText, setSearchText] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
+  const [sortType, setSortType] = useState("latest");
   const [showForm, setShowForm] = useState(false);
   const [editItemId, setEditItemId] = useState(null);
 
@@ -64,15 +64,34 @@ const Transactions = () => {
     setShowForm(true);
   };
 
+  // ✅ FILTER + SEARCH (ADVANCED)
   const filteredList = financeData.filter((item) => {
-    const matchSearch = item.category
-      .toLowerCase()
-      .includes(searchText.toLowerCase());
+    const search = searchText.toLowerCase();
+
+    const matchSearch =
+      item.category.toLowerCase().includes(search) ||
+      item.type.toLowerCase().includes(search) ||
+      item.amount.toString().includes(search) ||
+      item.date.includes(search);
 
     const matchType =
       typeFilter === "all" || item.type === typeFilter;
 
     return matchSearch && matchType;
+  });
+
+  // ✅ SORTING
+  const sortedList = [...filteredList].sort((a, b) => {
+    if (sortType === "latest") {
+      return new Date(b.date) - new Date(a.date);
+    } else if (sortType === "oldest") {
+      return new Date(a.date) - new Date(b.date);
+    } else if (sortType === "high") {
+      return b.amount - a.amount;
+    } else if (sortType === "low") {
+      return a.amount - b.amount;
+    }
+    return 0;
   });
 
   return (
@@ -83,20 +102,36 @@ const Transactions = () => {
       {/* Controls */}
       <div className="controls">
 
+        {/* SEARCH */}
         <input
           type="text"
-          placeholder="Search..."
+          placeholder="Search by category, type, amount, date..."
           className="input"
+          value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
 
+        {/* FILTER */}
         <select
           className="input"
+          value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
         >
           <option value="all">All</option>
           <option value="income">Income</option>
           <option value="expense">Expense</option>
+        </select>
+
+        {/* SORT */}
+        <select
+          className="input"
+          value={sortType}
+          onChange={(e) => setSortType(e.target.value)}
+        >
+          <option value="latest">Latest</option>
+          <option value="oldest">Oldest</option>
+          <option value="high">Amount High → Low</option>
+          <option value="low">Amount Low → High</option>
         </select>
 
         {role === "admin" && (
@@ -109,7 +144,7 @@ const Transactions = () => {
         )}
       </div>
 
-      {/* Form */}
+      {/* FORM */}
       {showForm && (
         <form onSubmit={handleSave} className="form">
 
@@ -119,7 +154,9 @@ const Transactions = () => {
             value={inputData.date}
             onChange={handleInput}
             className="input"
+            required
           />
+
           <input
             type="number"
             name="amount"
@@ -127,10 +164,11 @@ const Transactions = () => {
             value={inputData.amount}
             onChange={handleInput}
             className="input"
-            min={0}        // prevent negative
+            min={0}
             step="any"
             required
           />
+
           <input
             type="text"
             name="category"
@@ -138,6 +176,7 @@ const Transactions = () => {
             value={inputData.category}
             onChange={handleInput}
             className="input"
+            required
           />
 
           <select
@@ -155,10 +194,10 @@ const Transactions = () => {
           </button>
         </form>
       )}
-      {/* Table */}
+
+      {/* TABLE */}
       <div className="table-box">
         <table>
-
           <thead>
             <tr>
               <th>Date</th>
@@ -170,10 +209,9 @@ const Transactions = () => {
           </thead>
 
           <tbody>
-            {filteredList.length > 0 ? (
-              filteredList.map((item) => (
+            {sortedList.length > 0 ? (
+              sortedList.map((item) => (
                 <tr key={item.id}>
-
                   <td>{item.date}</td>
                   <td>₹{item.amount}</td>
                   <td>{item.category}</td>
@@ -199,7 +237,6 @@ const Transactions = () => {
                       </button>
                     </td>
                   )}
-
                 </tr>
               ))
             ) : (
