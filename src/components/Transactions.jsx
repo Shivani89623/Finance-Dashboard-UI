@@ -2,6 +2,7 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 
+
 const Transactions = () => {
   const {
     transactions: financeData,
@@ -23,7 +24,6 @@ const Transactions = () => {
     type: "expense"
   });
 
-  // handle input
   const handleInput = (e) => {
     setInputData({
       ...inputData,
@@ -31,7 +31,6 @@ const Transactions = () => {
     });
   };
 
-  // add / update
   const handleSave = (e) => {
     e.preventDefault();
 
@@ -48,7 +47,6 @@ const Transactions = () => {
       addTransaction(formattedData);
     }
 
-    // reset
     setInputData({
       date: "",
       amount: "",
@@ -60,14 +58,12 @@ const Transactions = () => {
     setShowForm(false);
   };
 
-  // edit
   const handleEditClick = (item) => {
     setInputData(item);
     setEditItemId(item.id);
     setShowForm(true);
   };
 
-  // filter logic
   const filteredList = financeData.filter((item) => {
     const matchSearch = item.category
       .toLowerCase()
@@ -80,23 +76,22 @@ const Transactions = () => {
   });
 
   return (
-    <div className="p-6">
+    <div className="transactions-container">
 
-      {/* Heading */}
-      <h2 className="text-2xl font-bold mb-4">My Transactions</h2>
+      <h2 className="transactions-title">My Transactions</h2>
 
       {/* Controls */}
-      <div className="flex flex-wrap gap-3 mb-5">
+      <div className="controls">
 
         <input
           type="text"
           placeholder="Search..."
-          className="border p-2 rounded-md"
+          className="input"
           onChange={(e) => setSearchText(e.target.value)}
         />
 
         <select
-          className="border p-2 rounded-md"
+          className="input"
           onChange={(e) => setTypeFilter(e.target.value)}
         >
           <option value="all">All</option>
@@ -107,7 +102,7 @@ const Transactions = () => {
         {role === "admin" && (
           <button
             onClick={() => setShowForm(!showForm)}
-            className="bg-purple-500 text-white px-4 py-2 rounded-md"
+            className="btn primary"
           >
             {showForm ? "Close" : "Add"}
           </button>
@@ -116,100 +111,92 @@ const Transactions = () => {
 
       {/* Form */}
       {showForm && (
-        <form onSubmit={handleSave} className="mb-5 flex flex-wrap gap-2">
+        <form onSubmit={handleSave} className="form">
 
           <input
             type="date"
             name="date"
             value={inputData.date}
             onChange={handleInput}
-            className="border p-2 rounded-md"
+            className="input"
           />
-
           <input
             type="number"
             name="amount"
             placeholder="Amount"
             value={inputData.amount}
             onChange={handleInput}
-            className="border p-2 rounded-md"
+            className="input"
+            min={0}        // prevent negative
+            step="any"
+            required
           />
-
           <input
             type="text"
             name="category"
             placeholder="Category"
             value={inputData.category}
             onChange={handleInput}
-            className="border p-2 rounded-md"
+            className="input"
           />
 
           <select
             name="type"
             value={inputData.type}
             onChange={handleInput}
-            className="border p-2 rounded-md"
+            className="input"
           >
             <option value="income">Income</option>
             <option value="expense">Expense</option>
           </select>
 
-          <button className="bg-green-500 text-white px-4 rounded-md">
+          <button className="btn success">
             {editItemId ? "Update" : "Save"}
           </button>
         </form>
       )}
-
       {/* Table */}
-      <div className="border rounded-lg overflow-hidden">
-        <table className="w-full text-sm">
+      <div className="table-box">
+        <table>
 
-          <thead className="bg-gray-100">
+          <thead>
             <tr>
-              <th className="p-2">Date</th>
-              <th className="p-2">Amount</th>
-              <th className="p-2">Category</th>
-              <th className="p-2">Type</th>
-              {role === "admin" && <th className="p-2">Action</th>}
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Category</th>
+              <th>Type</th>
+              {role === "admin" && <th>Action</th>}
             </tr>
           </thead>
 
           <tbody>
             {filteredList.length > 0 ? (
               filteredList.map((item) => (
-                <tr key={item.id} className="text-center border-t">
+                <tr key={item.id}>
 
-                  <td className="p-2">{item.date}</td>
-                  <td className="p-2">₹{item.amount}</td>
-                  <td className="p-2">{item.category}</td>
+                  <td>{item.date}</td>
+                  <td>₹{item.amount}</td>
+                  <td>{item.category}</td>
 
-                  <td
-                    className={`p-2 ${
-                      item.type === "income"
-                        ? "text-green-600"
-                        : "text-red-600"
-                    }`}
-                  >
+                  <td className={item.type === "income" ? "income-text" : "expense-text"}>
                     {item.type}
                   </td>
 
                   {role === "admin" && (
-                    <td className="p-2 space-x-2">
-
+                    <td>
                       <button
                         onClick={() => handleEditClick(item)}
-                        className="text-blue-500"
+                        className="action-btn edit"
                       >
                         Edit
                       </button>
 
                       <button
                         onClick={() => deleteTransaction(item.id)}
-                        className="text-red-500"
+                        className="action-btn delete"
                       >
                         Delete
                       </button>
-
                     </td>
                   )}
 
@@ -217,7 +204,7 @@ const Transactions = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="5" className="p-4 text-gray-500">
+                <td colSpan="5" className="no-data">
                   No data found
                 </td>
               </tr>

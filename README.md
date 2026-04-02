@@ -1,13 +1,13 @@
 
 
-# 💰 Shivani Finance Dashboard
+#  Shivani Finance Dashboard
 
-A clean and interactive **Finance Dashboard** built with **React** and **Tailwind CSS** to track income, expenses, and spending insights.  
+A clean and interactive **Finance Dashboard** built with **React** and **CSS** to track income, expenses, and spending insights.  
 This project was created as part of a **Frontend Developer Intern** assignment at **Zorvyn FinTech Pvt. Ltd.**
 
 ---
 
-## ✨ Features
+## Features
 
 - **Dashboard Overview**
   - Total Balance, Income, and Expenses cards
@@ -37,10 +37,10 @@ This project was created as part of a **Frontend Developer Intern** assignment a
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **React** – Frontend library
-- **Tailwind CSS** – Styling
+- **CSS** – Styling
 - **Recharts** – Charts (Pie, Line)
 - **Context API** – State management
 - **React Icons** – UI icons
@@ -51,7 +51,7 @@ This project was created as part of a **Frontend Developer Intern** assignment a
 
 1. **Clone the repository**:
 ```bash
-git clone https://github.com/username/finance-dashboard.git
+git clone https://github.com/Shivani89623/finance-dashboard.git
 
 
 
@@ -74,10 +74,9 @@ finance-dashboard/
 │   ├─ components/      # Navbar, Sidebar, Dashboard, Transactions, Insights
 │   ├─ context/         # AppContext for state management
 │   ├─ App.jsx
-│   └─ index.jsx
+│   └─ index.css
 │
 ├─ package.json
-├─ tailwind.config.js
 └─ README.md
 
 
@@ -86,3 +85,5 @@ This is a frontend-only project using mock/static data.
 Role switch and dark mode are handled entirely on the frontend.
 Designed with clarity, simplicity, and professional UI/UX in mind.
 Handles empty states gracefully (no transactions or no data).
+
+#Live link

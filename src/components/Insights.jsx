@@ -2,10 +2,11 @@
 import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
+
 const Insights = () => {
   const { transactions: financeData } = useContext(AppContext);
 
-  // store category wise expense
+  // category wise expense
   const expenseByCategory = {};
 
   financeData.forEach((item) => {
@@ -15,7 +16,7 @@ const Insights = () => {
     }
   });
 
-  // get highest spending category
+  // top category
   let topCategory = "N/A";
   let maxAmount = 0;
 
@@ -32,7 +33,7 @@ const Insights = () => {
     0
   );
 
-  // average spending (extra insight 🔥)
+  // average expense
   const totalTransactions = financeData.filter(
     (item) => item.type === "expense"
   ).length;
@@ -43,45 +44,43 @@ const Insights = () => {
       : 0;
 
   return (
-    <div className="p-6">
+    <div className="insights-container">
 
       {/* Heading */}
-      <h2 className="text-2xl font-bold mb-6">Smart Insights</h2>
+      <h2 className="insights-title">Smart Insights</h2>
 
       {/* Cards */}
-      <div className="grid md:grid-cols-3 gap-5">
+      <div className="insights-grid">
 
-        {/* Top Category */}
-        <div className="bg-purple-100 p-5 rounded-xl shadow-sm">
-          <p className="text-sm text-gray-600">Top Spending Category</p>
-          <h3 className="text-lg font-semibold">{topCategory}</h3>
+        <div className="insight-card purple">
+          <p className="label">Top Spending Category</p>
+          <h3 className="value">{topCategory}</h3>
         </div>
 
-        {/* Total Expense */}
-        <div className="bg-red-100 p-5 rounded-xl shadow-sm">
-          <p className="text-sm text-gray-600">Total Expense</p>
-          <h3 className="text-lg font-semibold">₹{totalSpent}</h3>
+        <div className="insight-card red">
+          <p className="label">Total Expense</p>
+          <h3 className="value">₹{totalSpent}</h3>
         </div>
 
-        {/* Average Spending */}
-        <div className="bg-green-100 p-5 rounded-xl shadow-sm">
-          <p className="text-sm text-gray-600">Average Spending</p>
-          <h3 className="text-lg font-semibold">₹{avgSpending}</h3>
+        <div className="insight-card green">
+          <p className="label">Average Spending</p>
+          <h3 className="value">₹{avgSpending}</h3>
         </div>
 
       </div>
 
-      {/* Smart Message */}
-      <div className="mt-6 bg-blue-100 p-5 rounded-xl shadow-sm">
-        <h3 className="font-semibold mb-2">Observation</h3>
+      {/* Observation */}
+      <div className="insight-box">
+        <h3 className="obs-title">Observation</h3>
 
         {totalSpent === 0 ? (
-          <p className="text-gray-500">No expense data available</p>
+          <p className="no-data">No expense data available</p>
         ) : totalSpent > 5000 ? (
-          <p>⚠️ You are spending more than usual this month.</p>
+          <p className="warning">⚠️ You are spending more than usual this month.</p>
         ) : (
-          <p>✅ Your spending looks balanced. Keep it up!</p>
+          <p className="good">✅ Your spending looks balanced. Keep it up!</p>
         )}
+
       </div>
 
     </div>

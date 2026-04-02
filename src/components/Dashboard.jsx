@@ -8,10 +8,12 @@ import {
   XAxis, YAxis, Tooltip, CartesianGrid
 } from "recharts";
 
+
+
 const Dashboard = () => {
   const { transactions: financeData } = useContext(AppContext);
 
-  // simple calculations
+  // calculations
   const totalIncome = financeData
     .filter(item => item.type === "income")
     .reduce((sum, item) => sum + item.amount, 0);
@@ -34,46 +36,46 @@ const Dashboard = () => {
   }));
 
   return (
-    <div className="p-6">
+    <div className="dashboard-container">
 
       {/* Heading */}
-      <h2 className="text-2xl font-bold mb-6">Dashboard Overview</h2>
+      <h2 className="dashboard-title">Dashboard Overview</h2>
 
       {/* Cards */}
-      <div className="grid md:grid-cols-3 gap-5 mb-8">
+      <div className="card-grid">
 
         {/* Balance */}
-        <div className="bg-purple-500 text-white p-6 rounded-xl shadow-md">
-          <FaWallet size={25} />
-          <p className="mt-2 text-sm">Balance</p>
-          <h2 className="text-xl font-bold">₹{totalBalance}</h2>
+        <div className="card balance">
+          <FaWallet className="card-icon" />
+          <p className="card-title">Balance</p>
+          <h2 className="card-value">₹{totalBalance}</h2>
         </div>
 
         {/* Income */}
-        <div className="bg-green-500 text-white p-6 rounded-xl shadow-md">
-          <FaArrowUp size={25} />
-          <p className="mt-2 text-sm">Income</p>
-          <h2 className="text-xl font-bold">₹{totalIncome}</h2>
+        <div className="card income">
+          <FaArrowUp className="card-icon" />
+          <p className="card-title">Income</p>
+          <h2 className="card-value">₹{totalIncome}</h2>
         </div>
 
         {/* Expense */}
-        <div className="bg-red-500 text-white p-6 rounded-xl shadow-md">
-          <FaArrowDown size={25} />
-          <p className="mt-2 text-sm">Expense</p>
-          <h2 className="text-xl font-bold">₹{totalExpense}</h2>
+        <div className="card expense">
+          <FaArrowDown className="card-icon" />
+          <p className="card-title">Expense</p>
+          <h2 className="card-value">₹{totalExpense}</h2>
         </div>
 
       </div>
 
       {/* Charts */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="chart-grid">
 
         {/* Pie Chart */}
-        <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
-          <h3 className="mb-3 font-medium">Income vs Expense</h3>
+        <div className="chart-box">
+          <h3 className="chart-title">Income vs Expense</h3>
 
           {financeData.length === 0 ? (
-            <p className="text-gray-500">No data available</p>
+            <p className="no-data">No data available</p>
           ) : (
             <PieChart width={300} height={250}>
               <Pie data={pieChartData} dataKey="value" outerRadius={90}>
@@ -86,11 +88,11 @@ const Dashboard = () => {
         </div>
 
         {/* Line Chart */}
-        <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
-          <h3 className="mb-3 font-medium">Spending Trend</h3>
+        <div className="chart-box">
+          <h3 className="chart-title">Spending Trend</h3>
 
           {financeData.length === 0 ? (
-            <p className="text-gray-500">No data available</p>
+            <p className="no-data">No data available</p>
           ) : (
             <LineChart width={350} height={250} data={trendData}>
               <CartesianGrid strokeDasharray="3 3" />
